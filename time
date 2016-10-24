@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>打铃设置系统</title>
+
+
+
+<script language="javascript">
+    function toVaild() {
+        alert("确定要提交吗？");
+    }
+
+    function getfrom() {
+		var myDate = new Date();
+          var year = myDate.getFullYear(); //获取完整的年份(4位,1970-????)
+          var month = myDate.getMonth() + 1;      //获取当前月份(0-11,0代表1月)
+          var data = myDate.getDate();      //获取当前日(1-31)
+          var week = myDate.getDay();        //获取当前星期X(0-6,0代表星期天)
+          if (week == 0) week = 7;
+          var hour = myDate.getHours();      //获取当前小时数(0-23)
+          var min = myDate.getMinutes();    //获取当前分钟数(0-59)
+          var sec = myDate.getSeconds();    //获取当前秒数(0-59)
+        //saveReport();
+        //提交表单
+        var myForm = document.forms['myForm'];
+        myForm.action = "http://192.168.1.105:/time.cgi";
+        myForm.method = 'get';
+        myForm.target = 'right';
+		myForm.time.value= year - 2000 + ":" + month + ":" + data + ":" + week + ":" + hour + ":" + min + ":" + sec;
+        myForm.submit();
+    }
+	      function l() {
+          today = new Date();
+          document.getElementById("local").innerHTML = today.toLocaleString();
+      }
+      setInterval("l()", 1000);		   
+</script>
+
+    <style type="text/css">
+        .style2
+        {
+            width: 89px;
+        }
+        .style3
+        {
+            width: 84px;
+        }
+    </style>
+
+</head>
+
+<body class="bodystyle">
+
+
+<div class="menu">
+	<ul class="ul1">
+    	<li class="li1"><a href="main.html">主页</a></li>
+        <li class="li1"><a href="myFrom.html">设置</a></li>
+        <li class="li1"><a href="STM32_display.shtml">显示</a></li>
+        <li class="li1"><a href="time.html">RTC实时时钟</a></li>
+        <li class="li1"><a href="#" target="left">帮助</a></li>
+    </ul>
+</div>
+ 
+<h3  >  <span >RTC实时时钟显示</span>  </h3>
+
+
+	<h4>电脑时间</h4>
+		<div id="local" style="font-size:20px;text-align:left"></div>
+
+
+<br/>
+   <h3>  时间校准</span> </h3>
+
+
+  <form action="http://192.168.1.103:/time.cgi" method="post" onsubmit="return toVaild()" name="myForm" >
+        <table border="1" cellpadding="0" cellspacing="0" >
+			<tr>
+			格式:年:月:日:星期:时:分:秒
+			</tr>
+            <tr>
+                <td class="style2">
+                       <input value=" " name="time" style="width:200px" id= "time">
+                </td>
+            </tr>
+          
+        </table>
+        <br />
+		   <input type="button" name="button3" value="提交" onclick="void getfrom();" 
+            style="height: 26px; width: 100px" />
+         
+         <br /> <br />
+        </form>
+
+ 
+
+
+</body>
+
+
+
+</html>
